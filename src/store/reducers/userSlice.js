@@ -1,20 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import API_URL from './services/authService';
+import { authService } from '../reducers/services/authService';
 
 export const getUserProfile = createAsyncThunk(
   'user/profile',
   async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${API_URL}/user/profile`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await response.json();
+      const data = await authService.getUserProfile();
       return data.body;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUserName = createAsyncThunk(
+  'user/updateUserName',
+  async (newUserName, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authService.updateUserName(newUserName);
+      dispatch(getUserProfile());
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -26,7 +31,7 @@ const userSlice = createSlice({
   initialState: {
     firstName: '',
     lastName: '',
-    accounts: [],
+    userName: '',
     loading: false,
     error: null
   },
@@ -40,12 +45,17 @@ const userSlice = createSlice({
         state.loading = false;
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
-        state.accounts = action.payload.accounts;
+        state.userName = action.payload.userName;
       })
       .addCase(getUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(updateUserName.fulfilled, (state, action) => {
+        if (action.payload && action.payload.userName) {
+          state.userName = action.payload.userName;
+        }
+     });
   }
 });
 

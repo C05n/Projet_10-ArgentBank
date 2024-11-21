@@ -1,58 +1,34 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from '../../store/reducers/services/authService';
+import { loginActions } from "../../store/actions/authActions";
 // 
 import InputForm from "../../components/InputForm/InputForm";
 import Button from "../../components/Button/Button";
 
 function Form() {
-   const [credentials, setCredentials] = useState({
-      email: "",
-      password: "",
+   const [authData, setAuthData] = useState({
+     email: "",
+     password: "",
+     rememberMe: false
    });
+   const error = useSelector(state => state.auth.error);
    
    const dispatch = useDispatch();
    const navigate = useNavigate();
-
-   const handleInputChange = (e) => {
-      const { id, value, type, checked } = e.target;
-      setCredentials(prev => ({
-         ...prev,
-         [id]: type === 'checkbox' ? checked : value
+ 
+   const handleInputChange = ({ target: { id, value, type, checked } }) => {
+      setAuthData(prev => ({
+        ...prev,
+        [id]: type === 'checkbox' ? checked : value
       }));
-   }
-
+    }
+ 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log('Attempting login with:', credentials);
-
-      const loginPayload = {
-         email: credentials.email,
-         password: credentials.password
-      };
-   
-      
-      try {
-         dispatch({ type: 'LOGIN_REQUEST'});
-         const data = await loginUser(credentials);
-         console.log('Login response:', data);
-         
-         dispatch({ 
-            type: 'LOGIN_SUCCESS',
-            payload: {
-               token: data.body.token,
-               user: data.body
-            }
-         });
-         
-         navigate('/User');
-      } catch (error) {
-         console.error('Login error:', error);
-         dispatch({ 
-            type: 'LOGIN_FAILURE',
-            payload: error.message
-         });
+      const loginSuccess = await dispatch(loginActions.login(authData));
+      if (loginSuccess) {
+         navigate('/user');
       }
    }
 
@@ -66,25 +42,26 @@ function Form() {
                   label="Email"
                   type="email"
                   id="email"
-                  value={credentials.email}
+                  value={authData.email}
                   onChange={handleInputChange}
                />
                <InputForm
                   label="Password"
                   type="password"
                   id="password"
-                  value={credentials.password}
+                  value={authData.password}
                   onChange={handleInputChange}
                />
                <div className="input-remember">
                   <input
                      type="checkbox"
-                     id="remember-me"
-                     checked={credentials.rememberMe}
+                     id="rememberMe"
+                     checked={authData.rememberMe}
                      onChange={handleInputChange}
                   />
-                  <label htmlFor="remember-me">Remember me</label>
+                  <label htmlFor="rememberMe">Remember me</label>
                </div>
+               {error && <p className="error">{error}</p>}
                <Button className="sign-in-button" text="Sign In" type="submit" />
             </form>
          </section>

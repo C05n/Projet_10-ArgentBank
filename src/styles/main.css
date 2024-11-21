@@ -13,6 +13,52 @@ body, .App {
   min-height: 100vh;
 }
 
+
+
+/*** ***/
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.edit-container .input-wrapper {
+  margin-bottom: 0;
+}
+.edit-container input {
+  width: 200px;
+  height: 20px;
+}
+.edit-container button {
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 150px ;
+  border-radius: 5px;
+}
+.edit-mode-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.edit-mode-div p {
+  margin-right: 10px;
+}
+.edit-mode-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.name-input {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/***  ***/
+
+
+
 .main {
   flex: 1;
 }
@@ -54,6 +100,10 @@ body, .App {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+}
+.main-nav-item i {
+  margin-right: 4px;
+  margin-left: 10px;
 }
 
 .main-nav-item:hover {

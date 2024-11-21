@@ -1,4 +1,4 @@
-function InputForm({ label, type, id, value, onChange }) {
+function InputForm({ label, type, id, value,defaultValue, onChange, className, readOnly }) {
   return (
     <div className="input-wrapper">
       <label htmlFor={id}>{label}</label>
@@ -6,7 +6,10 @@ function InputForm({ label, type, id, value, onChange }) {
         type={type}
         id={id}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
+        className={className}
+        readOnly={readOnly}
       />
     </div>
   );
