@@ -54,6 +54,9 @@ body, .App {
   opacity: 0.5;
   pointer-events: none;
 }
+.error {
+  color: red;
+}
 
 /***  ***/
 
