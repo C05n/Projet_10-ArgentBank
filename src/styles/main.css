@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #00ac50;
+}
+
 html {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -67,7 +71,7 @@ body, .App {
 }
 
 .bg-dark {
-  background-color: #12002b;
+  background: #ffffff;
 }
 
 .sr-only {
@@ -92,8 +96,7 @@ body, .App {
 }
 
 .main-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  color: var(--primary-color);
 }
 
 .main-nav a.router-link-exact-active {
@@ -103,10 +106,12 @@ body, .App {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  font-size: 1em;
 }
 .main-nav-item i {
   margin-right: 4px;
   margin-left: 10px;
+  font-size: 1.5em;
 }
 
 .main-nav-item:hover {
@@ -122,14 +127,20 @@ body, .App {
   max-width: 100%;
   width: 200px;
 }
+.homepage {
+  display: flex;
+}
 
 .hero {
   background-image: url('../img/bank-tree.jpeg');
-  background-position: 0 -50px;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   height: 300px;
   position: relative;
+  max-width: 1160px;
+  width: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .hero-content {
@@ -140,6 +151,8 @@ body, .App {
   padding: 2rem;
   text-align: left;
   margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content .subtitle {
@@ -155,8 +168,8 @@ body, .App {
 
 @media (min-width: 920px) {
   .hero {
-    height: 400px;
-    background-position: 0% 33%;
+    height: 773px;
+    background-position: 0% 50%;
   }
 
   .hero-content {
@@ -177,26 +190,35 @@ body, .App {
 }
 
 .features {
-  display: flex;
-  flex-direction: column;
+  background-color: white;
 }
 
 @media (min-width: 920px) {
   .features {
-    flex-direction: row;
+    width: 40%;
+    min-height: 100%;
   }
 }
 
 .feature-icon {
   width: 100px;
-  border: 10px solid #00bc77;
+  height: 100px;
+  border: 10px solid var(--primary-color);
   border-radius: 50%;
   padding: 1rem;
 }
 
 .feature-item {
-  flex: 1;
-  padding: 2.5rem;
+  padding: 1rem;
+  margin-right: 10px;
+  display: flex;
+  margin: 7% 1%;
+}
+.feature-item-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  width: 100%;
 }
 
 .feature-item-title {
@@ -209,26 +231,30 @@ body, .App {
 .sign-in-button {
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   font-size: 1.1rem;
   font-weight: bold;
-  margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
+  margin-top: 2rem;
+  border: none;
+  background-color: var(--primary-color);
   color: #fff;
+  border-radius: 5px;
 }
 
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
-  width: 300px;
+  width: 500px;;
   margin: 0 auto;
   margin-top: 3rem;
-  padding: 2rem;
+  padding: 4rem;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px  rgba(0, 0, 0, 0.25);
 }
 
 .sign-in-icon {
   font-size: 5rem;
+  color: var(--primary-color);
 }
 
 .input-remember {
@@ -243,7 +269,7 @@ body, .App {
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .input-wrapper label {
@@ -253,6 +279,8 @@ body, .App {
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .footer {
@@ -260,6 +288,7 @@ body, .App {
   justify-content: center;
   border-top: 2px solid #ccc;
   padding: 2rem 0 1.5rem;
+  font-size: 0.8em;
 }
 
 .footer-text {
@@ -270,16 +299,18 @@ body, .App {
 .account {
   display: flex;
   justify-content: space-between;
+  color: #fff;
   align-items: center;
   border: 1px solid black;
-  background-color: #fff;
-  width: 80%;
+  background-color: #434343;
+  border-radius: 10px ;
+  width: 70%;
   margin: 0 auto;
   flex-direction: column;
   padding: 1.5rem;
   box-sizing: border-box;
   text-align: left;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .account-amount {
@@ -305,28 +336,33 @@ body, .App {
 }
 
 .edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
   color: #fff;
   font-weight: bold;
   padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 2rem;
 }
 
-.header {
+header {
   color: #fff;
-  margin-bottom: 2rem;
+  z-index: 1;
+  box-shadow: -10px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .transaction-button {
   display: block;
   width: 100%;
+  height: 100%;
   padding: 8px;
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
   color: #fff;
+  background: transparent;
+  border: none;
 }
 
 @media (min-width: 720px) {

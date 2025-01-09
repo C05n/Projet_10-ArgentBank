@@ -26,6 +26,7 @@ function Header() {
    }, [dispatch, userName]);
 
    return (
+      <header>
       <nav className="main-nav">
          <NavLink to="/" className="main-nav-logo">
             <img
@@ -55,6 +56,7 @@ function Header() {
             )}
          </div>
       </nav>
+      </header>
    );
 }
 export default Header;
