@@ -10,6 +10,7 @@ function Home() {
       <main className="homepage">
          <Banner />
          <section className="features">
+            <h2 className="sr-only">Features</h2>
             <Features
                image={IconChat}
                title="You are our #1 priority"
